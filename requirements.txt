@@ -1,0 +1,22 @@
+# FASTAPI
+uvicorn[standar]
+fastapi[standar]
+
+# ORM
+alembic
+asyncpg
+SQLAlchemy[asyncio]
+
+# SCHEMA
+pydantic-settings
+pydantic[email]
+pydantic
+
+# MODULES
+PyJWT
+passlib[bcrypt]
+cryptography
+python-decouple
+
+# TESTING
+pytest
