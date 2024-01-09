@@ -54,7 +54,8 @@ Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estru
 
 
 # Estructura del Proyecto
-│
+ ```
+ │
 ├── .env                                            # Configuración de entorno
 ├── .env.test                                       # Configuración de entorno para pruebas
 ├── CONTRIBUTING.md                                 # Directrices para contribuir al proyecto
@@ -207,3 +208,5 @@ Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estru
         ├── test_administration                     # Pruebas para el módulo de administración
         ├── test_authentication                     # Pruebas para el módulo de autenticación
         └── test_management                         # Pruebas para el módulo de gestión
+
+ ```
