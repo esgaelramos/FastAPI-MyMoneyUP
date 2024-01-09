@@ -7,7 +7,6 @@ Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estru
 ### Directorios Principales
 
 - **.env y .env.test**: Configuración de entorno para desarrollo y pruebas.
-- **arbol.txt**: Archivo generado que muestra la estructura del árbol de directorios.
 - **CONTRIBUTING.md**: Directrices para contribuir al proyecto.
 - **docker-compose.yaml y Dockerfile**: Configuración para Docker Compose y construcción de la imagen de Docker.
 - **LICENSE**: Licencia del proyecto.
@@ -58,7 +57,6 @@ Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estru
 │
 ├── .env                                            # Configuración de entorno
 ├── .env.test                                       # Configuración de entorno para pruebas
-├── arbol.txt                                       # Archivo generado con la estructura del árbol
 ├── CONTRIBUTING.md                                 # Directrices para contribuir al proyecto
 ├── docker-compose.yaml                             # Configuración para Docker Compose
 ├── Dockerfile                                      # Configuración para construir la imagen de Docker
