@@ -121,4 +121,10 @@ Pytest es un marco de prueba en Python que simplifica la escritura y ejecución 
 ## Funciones Clave
 
 - **Sintaxis Clara y Concisa**: Ofrece una sintaxis simple y fácil de entender para escribir pruebas.
-- **Amplio Soporte
+- **Amplio Soporte**: Admite pruebas unitarias, de integración y funcionales.
+- **Extensibilidad**: Permite la integración con numerosos complementos y extensiones.
+
+## Enlaces
+
+- [Documentación Oficial de Pytest](https://docs.pytest.org/en/latest/)
+- [Repositorio en GitHub](https://github.com/pytest-dev/pytest)
