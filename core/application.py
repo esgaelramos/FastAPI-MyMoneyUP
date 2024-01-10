@@ -32,13 +32,15 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from settings import SETTINGS
 from core.routers.routers import all_routers
+from core.contexts.managers.Lifespan import lifespan
 
 
 
 # Crea una instancia de FastAPI
 app = FastAPI(
-    title=SETTINGS.PROJECT_NAME,                                # Nombre del proyecto
-    openapi_url=f"{SETTINGS.URL_API_DOCUMENTATION}openapi.json" # Ruta para la documentacion
+    title=SETTINGS.PROJECT_NAME,                                 # Nombre del proyecto
+    openapi_url=f"{SETTINGS.URL_API_DOCUMENTATION}openapi.json", # Ruta para la documentacion
+    lifespan=lifespan                                            # Maneja el ciclo de vida de FastAPI
 )
 
 

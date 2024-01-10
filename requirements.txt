@@ -20,3 +20,8 @@ python-decouple
 
 # TESTING
 pytest
+
+# LINTERS/OTHERS
+black
+flake8
+pre-commit
