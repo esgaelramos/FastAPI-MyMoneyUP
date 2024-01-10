@@ -183,17 +183,17 @@ class BaseUsecases:
         search_fields: List[str] = [],
     ) -> PaginationEntities:
         """
-            Lista objetos de la base de datos con opciones de paginación y búsqueda.
+                Lista objetos de la base de datos con opciones de paginación y búsqueda.
 
-            Args:
-                page_number: Número de página.
-                page_size: Tamaño de la página.
-                search: Término de búsqueda (opcional).
-                search_fields: Lista de nombres de campos donde se realizará la búsqueda (opcional).
+                Args:
+                    page_number: Número de página.
+                    page_size: Tamaño de la página.
+                    search: Término de búsqueda (opcional).
+                    search_fields: Lista de nombres de campos donde se realizará la búsqueda (opcional).
 
-            Returns:
-                Un diccionario con información de paginación y contenido de la página.
-                
+                Returns:
+                    Un diccionario con información de paginación y contenido de la página.
+
         """
         async with self.get_connection() as session:
             # Crear una transacción única para todas las operaciones
