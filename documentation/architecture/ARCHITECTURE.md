@@ -55,7 +55,7 @@ Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estru
 
 # Estructura del Proyecto
  ```
- │
+│
 ├── .env                                            # Configuración de entorno
 ├── .env.test                                       # Configuración de entorno para pruebas
 ├── CONTRIBUTING.md                                 # Directrices para contribuir al proyecto
