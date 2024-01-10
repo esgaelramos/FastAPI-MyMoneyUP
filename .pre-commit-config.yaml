@@ -4,9 +4,7 @@ repos:
     hooks:
     - id: black
       stages: [commit]
-      always_run: true
-      entry: "black --diff ."
-      pass_filenames: false
+      entry: black --diff .
 
 -   repo: https://github.com/pycqa/flake8
     rev: 7.0.0
