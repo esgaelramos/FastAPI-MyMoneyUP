@@ -18,18 +18,24 @@ from sqlalchemy.orm import Mapped, mapped_column
 from core.databases.configs.ConfigPostgreSQL import Base
 
 
-
 class BaseModel(Base):
     """
-        Clase base abstracta para modelos de SQLAlchemy.
+    Clase base abstracta para modelos de SQLAlchemy.
 
-        Attributes:
-            id (Mapped[int]): Campo que representa un identificador único (clave primaria).
-            created_at (Mapped[datetime]): Campo que representa la fecha de creación del registro.
-            updated_at (Mapped[datetime]): Campo que representa la fecha de última actualización del registro.
+    Attributes:
+        id (Mapped[int]): Campo que representa un identificador único (clave primaria).
+        created_at (Mapped[datetime]): Campo que representa la fecha de creación del registro.
+        updated_at (Mapped[datetime]): Campo que representa la fecha de última actualización del registro.
     """
+
     __abstract__ = True
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True, index=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=func.now())
-    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=func.now(), onupdate=func.now())
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True, autoincrement=True, index=True
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=func.now(), onupdate=func.now()
+    )

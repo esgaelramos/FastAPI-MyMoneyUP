@@ -5,7 +5,7 @@ services:
         build: .
         image: temii_image
         container_name: temii_container
-        command: uvicorn main:app --reload --host 0.0.0.0 --port 8000 --workers 8
+        command: uvicorn core.application:app --reload --host 0.0.0.0 --port 8000 --workers 8
 
         ports:
             - 8000:8000

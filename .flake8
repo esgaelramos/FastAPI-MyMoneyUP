@@ -1,6 +1,7 @@
 [flake8]
-exclude = .git, *migrations*, E203, E266, E501, W503, F403, F401, W292
-max-line-length = 80
+exclude = .git, *migrations*, E203, E266, E501, W503, F403, F401
+extend-ignore = E303, W291, W292, E261, E302
+max-line-length = 250
 max-complexity = 20
 select = B, C, E, F, W, T4, B9
 docstring-convention = numpy

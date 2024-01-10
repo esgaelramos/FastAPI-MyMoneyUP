@@ -35,12 +35,11 @@ from core.routers.routers import all_routers
 from core.contexts.managers.Lifespan import lifespan
 
 
-
 # Crea una instancia de FastAPI
 app = FastAPI(
-    title=SETTINGS.PROJECT_NAME,                                 # Nombre del proyecto
-    openapi_url=f"{SETTINGS.URL_API_DOCUMENTATION}openapi.json", # Ruta para la documentacion
-    lifespan=lifespan                                            # Maneja el ciclo de vida de FastAPI
+    title=SETTINGS.PROJECT_NAME,  # Nombre del proyecto
+    openapi_url=f"{SETTINGS.URL_API_DOCUMENTATION}openapi.json",  # Ruta para la documentacion
+    lifespan=lifespan,  # Maneja el ciclo de vida de FastAPI
 )
 
 
@@ -62,10 +61,10 @@ all_routers(app=app)
 @app.get("/", include_in_schema=False)
 async def documentation() -> RedirectResponse:
     """
-        Ruta de redirección a la documentación principal.
-        Esta función redirige a la ruta `/documentation` utilizando `RedirectResponse`.
+    Ruta de redirección a la documentación principal.
+    Esta función redirige a la ruta `/documentation` utilizando `RedirectResponse`.
 
-        Returns:
-            RedirectResponse: Redirección a la ruta `/documentation`.
+    Returns:
+        RedirectResponse: Redirección a la ruta `/documentation`.
     """
     return RedirectResponse(url="/docs")

@@ -15,19 +15,18 @@ from settings import SETTINGS
 from core.databases.configs.ConfigPostgreSQL import CONNECTION_DATABASE
 
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> None:
     """
-        Contexto asincrónico para el manejo del ciclo de vida de una aplicación FastAPI.
+    Contexto asincrónico para el manejo del ciclo de vida de una aplicación FastAPI.
 
-        Args:
-            app (FastAPI): Instancia de la aplicación FastAPI.
+    Args:
+        app (FastAPI): Instancia de la aplicación FastAPI.
 
-        Yields:
-            None
+    Yields:
+        None
     """
-    
+
     if SETTINGS.EXISTS_TABLES:
         await CONNECTION_DATABASE.create_all()
 

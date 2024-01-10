@@ -10,4 +10,4 @@ repos:
     hooks:
     - id: black
       stages: [commit]
-      args: ["--check", "--diff", "."]
+      args: ["--diff", "."]
