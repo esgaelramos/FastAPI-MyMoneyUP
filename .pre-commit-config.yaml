@@ -1,15 +1,15 @@
 repos:
 -   repo: https://github.com/ambv/black
     rev: 23.12.1
-    language_version: python3.11
     hooks:
     - id: black
       stages: [commit]
+      language_version: python3.11
       args: ["--diff", "."]
 
 -   repo: https://github.com/pycqa/flake8
     rev: 7.0.0
-    language_version: python3.11
     hooks:
     - id: flake8
+      language_version: python3.11
       stages: [commit]
