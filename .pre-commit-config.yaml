@@ -5,7 +5,7 @@ repos:
     - id: black
       stages: [commit]
       language_version: python3.11
-      args: ["--diff", "."]
+      args: ["black", "--diff", "."]
 
 -   repo: https://github.com/pycqa/flake8
     rev: 7.0.0

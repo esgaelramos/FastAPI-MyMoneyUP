@@ -193,6 +193,7 @@ class BaseUsecases:
 
             Returns:
                 Un diccionario con información de paginación y contenido de la página.
+                
         """
         async with self.get_connection() as session:
             # Crear una transacción única para todas las operaciones
