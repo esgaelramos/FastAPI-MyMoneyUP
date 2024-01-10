@@ -1,7 +1,7 @@
 migrations/
 alembic.ini
 *.ini
-pyproject.toml
+# pyproject.toml
 .env
 
 # Byte-compiled / optimized / DLL files
