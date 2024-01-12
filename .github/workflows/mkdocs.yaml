@@ -1,4 +1,4 @@
-name: Site Documentation
+name: Documentation Site
 
 on:
   push:
@@ -13,17 +13,42 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material
-      - name: Debug Information
+
+      - name: Install dependencies
         run: |
-          DOCUMENTATION_DIR="documentation"
-          ls -R $DOCUMENTATION_DIR
-      - name: Site Documentation
+          pip install mkdocs-material
+
+      - name: Build MkDocs
         run: |
-          DOCUMENTATION_DIR="documentation"
-          cd $DOCUMENTATION_DIR
+          cd documentation
+          mkdocs build
+
+      - name: Deploy to GitHub Pages
+        run: |
+          cd documentation
           mkdocs gh-deploy --force
+
+      - name: Update build status
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+
+            const context = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+
+            github.repos.createCommitStatus({
+              ...context.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'MkDocs Build',
+              description: 'MkDocs build successful!',
+              target_url: 'https://esgaelramos.github.io/FastAPI-MyMoneyUP/'
+            });
