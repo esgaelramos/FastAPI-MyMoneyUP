@@ -1,4 +1,5 @@
 site_name: Temii API
+site_url: https://esgaelramos.github.io/FastAPI-MyMoneyUP/
 
 theme:
   language: es
