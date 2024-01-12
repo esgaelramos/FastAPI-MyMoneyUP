@@ -1,4 +1,4 @@
-name: Documentation Site
+name: Site Documentation
 
 on:
   push:
@@ -7,31 +7,23 @@ on:
       - main
 
 permissions:
-  contents: read
-  packages: write
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.x
-
-      - name: Install dependencies
+      - run: pip install mkdocs-material
+      - name: Debug Information
         run: |
-          pip install mkdocs mkdocs-material
-
-      - name: Build MkDocs
+          DOCUMENTATION_DIR="documentation"
+          ls -R $DOCUMENTATION_DIR
+      - name: Site Documentation
         run: |
-          cd documentation
-          mkdocs build
-
-      - name: Deploy to GitHub Pages
-        run: |
-          cd documentation
+          DOCUMENTATION_DIR="documentation"
+          cd $DOCUMENTATION_DIR
           mkdocs gh-deploy --force
