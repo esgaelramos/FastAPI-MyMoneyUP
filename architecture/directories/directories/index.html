@@ -1,0 +1,1206 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://esgaelramos.github.io/FastAPI-MyMoneyUP/architecture/directories/directories/">
+      
+      
+        <link rel="prev" href="../../databases/redis/">
+      
+      
+        <link rel="next" href="../../middlewares/jwt/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>Directorios - Talk Organizer API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arquitectura-onion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Talk Organizer API" class="md-header__button md-logo" aria-label="Talk Organizer API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Talk Organizer API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Directorios
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../databases/postgresql/" class="md-tabs__link">
+          
+  
+    
+  
+  Arquitectura
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../release/" class="md-tabs__link">
+        
+  
+    
+  
+  Release Notes
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Talk Organizer API" class="md-nav__button md-logo" aria-label="Talk Organizer API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Talk Organizer API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Bases de datos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../databases/postgresql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Postgresql
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../databases/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Directorios
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Directorios
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura del Proyecto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura del Proyecto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directorios-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directorios Principales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulos-de-la-aplicacion-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Módulos de la Aplicación (apps)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nucleo-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      Núcleo (core)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pruebas (tests)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beneficios-de-la-arquitectura-onion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beneficios de la Arquitectura Onion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Middlewares
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Middlewares
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../middlewares/jwt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jwt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../middlewares/rate_limit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rate limit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements/requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requisitos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Configuraciones
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Configuraciones
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../settings/environments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../settings/migtrations.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    None
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../settings/pre_commit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pre commit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../release/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura del Proyecto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura del Proyecto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directorios-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directorios Principales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulos-de-la-aplicacion-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Módulos de la Aplicación (apps)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nucleo-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      Núcleo (core)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pruebas (tests)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beneficios-de-la-arquitectura-onion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beneficios de la Arquitectura Onion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="arquitectura-onion">Arquitectura Onion</h1>
+<p>Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estructura modular y fácilmente mantenible. La arquitectura Onion se basa en capas concéntricas, cada una con una función específica. La estructura del proyecto refleja esta organización en capas y facilita el desarrollo, la prueba y el mantenimiento del software.</p>
+<h2 id="estructura-del-proyecto">Estructura del Proyecto</h2>
+<h3 id="directorios-principales">Directorios Principales</h3>
+<ul>
+<li><strong>.env y .env.test</strong>: Configuración de entorno para desarrollo y pruebas.</li>
+<li><strong>CONTRIBUTING.md</strong>: Directrices para contribuir al proyecto.</li>
+<li><strong>docker-compose.yaml y Dockerfile</strong>: Configuración para Docker Compose y construcción de la imagen de Docker.</li>
+<li><strong>LICENSE</strong>: Licencia del proyecto.</li>
+<li><strong>main.py</strong>: Punto de entrada principal de la aplicación.</li>
+<li><strong>README.md</strong>: Documentación principal del proyecto.</li>
+<li><strong>requirements.txt</strong>: Lista de dependencias del proyecto.</li>
+<li><strong>settings.py</strong>: Configuración principal de la aplicación.</li>
+</ul>
+<h3 id="modulos-de-la-aplicacion-apps">Módulos de la Aplicación (apps)</h3>
+<ul>
+<li><strong>administration</strong>: Módulo de administración.</li>
+<li><strong>analytics</strong>: Módulo de análisis.<ul>
+<li><strong>application/usecases</strong>: Casos de uso específicos para análisis.</li>
+<li><strong>domain/entities</strong>: Entidades relacionadas con análisis.</li>
+<li><strong>domain/repositories</strong>: Repositorios relacionados con análisis.</li>
+<li><strong>interfaces/controllers</strong>: Controladores para administración.</li>
+</ul>
+</li>
+<li><strong>endpoints</strong>: Módulo de puntos finales.<ul>
+<li><strong>application/usecases</strong>: Casos de uso específicos para puntos finales.</li>
+<li><strong>domain/entities</strong>: Entidades relacionadas con puntos finales.</li>
+<li><strong>domain/repositories</strong>: Repositorios relacionados con puntos finales.</li>
+<li><strong>interfaces/controllers</strong>: Controladores para administración.</li>
+</ul>
+</li>
+<li>
+<p><strong>groups, roles, users</strong>: Módulos para grupos, roles y usuarios respectivamente.</p>
+</li>
+<li>
+<p><strong>authentication</strong>: Módulo de autenticación.</p>
+</li>
+<li>
+<p><strong>change_password, forgot_password, login, register, social_oauth</strong>: Submódulos especializados en funciones de autenticación.</p>
+</li>
+<li>
+<p><strong>management</strong>: Módulo de gestión.</p>
+</li>
+<li><strong>blogs, calendar, presentations, resources</strong>: Submódulos que gestionan blogs, calendarios, presentaciones y recursos respectivamente.</li>
+</ul>
+<h3 id="nucleo-core">Núcleo (core)</h3>
+<ul>
+<li><strong>bases, contexts/managers, databases, helpers, middlewares, routers, services, templates</strong>: Módulo principal del núcleo que proporciona las bases, configuraciones y servicios esenciales.</li>
+</ul>
+<h3 id="pruebas-tests">Pruebas (tests)</h3>
+<ul>
+<li><strong>conftest.py y test_main.py</strong>: Configuración y pruebas para el módulo principal.</li>
+<li><strong>test_modules</strong>: Pruebas para los módulos individuales, divididas en administración, autenticación y gestión.</li>
+</ul>
+<h2 id="beneficios-de-la-arquitectura-onion">Beneficios de la Arquitectura Onion</h2>
+<ul>
+<li><strong>Modularidad</strong>: Cada capa y módulo es independiente, facilitando la reutilización y el mantenimiento.</li>
+<li><strong>Escalabilidad</strong>: La arquitectura permite agregar nuevas funcionalidades y módulos sin afectar el código existente.</li>
+<li><strong>Pruebas Unitarias</strong>: La estructura facilita la escritura y ejecución de pruebas unitarias para cada capa y módulo.</li>
+<li><strong>Separación de Responsabilidades</strong>: Las capas claramente definidas permiten una separación efectiva de las responsabilidades, mejorando la claridad y la legibilidad del código.</li>
+</ul>
+<h1 id="estructura-del-proyecto_1">Estructura del Proyecto</h1>
+<pre><code class="language-console">│
+├── .env                                            # Configuración de entorno
+├── .env.test                                       # Configuración de entorno para pruebas
+├── CONTRIBUTING.md                                 # Directrices para contribuir al proyecto
+├── docker-compose.yaml                             # Configuración para Docker Compose
+├── Dockerfile                                      # Configuración para construir la imagen de Docker
+├── LICENSE                                         # Licencia del proyecto
+├── main.py                                         # Punto de entrada principal de la aplicación
+├── README.md                                       # Documentación principal del proyecto
+├── requirements.txt                                # Lista de dependencias del proyecto
+├── settings.py                                     # Configuración principal de la aplicación
+├── apps                                            # Módulos de la aplicación
+│   ├── administration                              # Módulo de administración
+│   │   ├── analytics                               # Módulo de análisis
+│   │   │   ├── application                         # Capa de aplicación para análisis
+│   │   │   │   └── usecases                        # Casos de uso específicos para análisis
+│   │   │   ├── domain                              # Capa de dominio para análisis
+│   │   │   │   ├── entities                        # Entidades relacionadas con análisis
+│   │   │   │   └── repositories                    # Repositorios relacionados con análisis
+│   │   │   └── interfaces                          # Interfaces relacionadas con administración
+│   │   │       └── controllers                     # Controladores para administración
+│   │   │
+│   │   ├── endpoints                               # Módulo de puntos finales
+│   │   │   ├── application                         # Capa de aplicación para puntos finales
+│   │   │   │   └── usecases                        # Casos de uso específicos para puntos finales
+│   │   │   ├── domain                              # Capa de dominio para puntos finales
+│   │   │   │   ├── entities                        # Entidades relacionadas con puntos finales
+│   │   │   │   └── repositories                    # Repositorios relacionados con puntos finales
+│   │   │   └── interfaces                          # Interfaces relacionadas con administración
+│   │   │       └── controllers                     # Controladores para administración
+│   │   │
+│   │   ├── groups                                  # Módulo de grupos
+│   │   │   ├── application                         # Capa de aplicación para grupos
+│   │   │   │   └── usecases                        # Casos de uso específicos para grupos
+│   │   │   ├── domain                              # Capa de dominio para grupos
+│   │   │   │   ├── entities                        # Entidades relacionadas con grupos
+│   │   │   │   └── repositories                    # Repositorios relacionados con grupos
+│   │   │   └── interfaces                          # Interfaces relacionadas con grupos
+│   │   │       └── controllers                     # Controladores para grupos
+│   │   │
+│   │   ├── roles                                   # Módulo de roles
+│   │   │   ├── application                         # Capa de aplicación para roles
+│   │   │   │   └── usecases                        # Casos de uso específicos para roles
+│   │   │   ├── domain                              # Capa de dominio para roles
+│   │   │   │   ├── entities                        # Entidades relacionadas con roles
+│   │   │   │   └── repositories                    # Repositorios relacionados con roles
+│   │   │   └── interfaces                          # Interfaces relacionadas con roles
+│   │   │       └── controllers                     # Controladores para roles
+│   │   │
+│   │   └── users                                   # Módulo de usuarios
+│   │       ├── application                         # Capa de aplicación para usuarios
+│   │       │   └── usecases                        # Casos de uso específicos para usuarios
+│   │       ├── domain                              # Capa de dominio para usuarios
+│   │       │   ├── entities                        # Entidades relacionadas con usuarios
+│   │       │   └── repositories                    # Repositorios relacionados con usuarios
+│   │       └── interfaces                          # Interfaces relacionadas con usuarios
+│   │           └── controllers                     # Controladores para usuarios
+│   │
+│   ├── authentication                              # Módulo de autenticación
+│   │   ├── change_password                         # Submódulo de cambio de contraseña
+│   │   │   ├── application                         # Capa de aplicación para cambio de contraseña
+│   │   │   │   └── usecases                        # Casos de uso específicos para cambio de contraseña
+│   │   │   ├── domain                              # Capa de dominio para cambio de contraseña
+│   │   │   │   ├── entities                        # Entidades relacionadas con cambio de contraseña
+│   │   │   │   └── repositories                    # Repositorios relacionados con cambio de contraseña
+│   │   │   └── interfaces                          # Interfaces relacionadas con cambio de contraseña
+│   │   │       └── controllers                     # Controladores para cambio de contraseña
+│   │   │
+│   │   ├── forgot_password                         # Submódulo de olvido de contraseña
+│   │   │   ├── application                         # Capa de aplicación para olvido de contraseña
+│   │   │   │   └── usecases                        # Casos de uso específicos para olvido de contraseña
+│   │   │   ├── domain                              # Capa de dominio para olvido de contraseña
+│   │   │   │   ├── entities                        # Entidades relacionadas con olvido de contraseña
+│   │   │   │   └── repositories                    # Repositorios relacionados con olvido de contraseña
+│   │   │   └── interfaces                          # Interfaces relacionadas con olvido de contraseña
+│   │   │       └── controllers                     # Controladores para olvido de contraseña
+│   │   │
+│   │   ├── login                                   # Submódulo de inicio de sesión
+│   │   │   ├── application                         # Capa de aplicación para inicio de sesión
+│   │   │   │   └── usecases                        # Casos de uso específicos para inicio de sesión
+│   │   │   ├── domain                              # Capa de dominio para inicio de sesión
+│   │   │   │   ├── entities                        # Entidades relacionadas con inicio de sesión
+│   │   │   │   └── repositories                    # Repositorios relacionados con inicio de sesión
+│   │   │   └── interfaces                          # Interfaces relacionadas con inicio de sesión
+│   │   │       └── controllers                     # Controladores para inicio de sesión
+│   │   │
+│   │   ├── register                                # Submódulo de registro de usuario
+│   │   │   ├── application                         # Capa de aplicación para registro de usuario
+│   │   │   │   └── usecases                        # Casos de uso específicos para registro de usuario
+│   │   │   ├── domain                              # Capa de dominio para registro de usuario
+│   │   │   │   ├── entities                        # Entidades relacionadas con registro de usuario
+│   │   │   │   └── repositories                    # Repositorios relacionados con registro de usuario
+│   │   │   └── interfaces                          # Interfaces relacionadas con registro de usuario
+│   │   │       └── controllers                     # Controladores para registro de usuario
+│   │   └── social_oauth                            # Submódulo de autenticación social (OAuth)
+│   │
+│   │       ├── application                         # Capa de aplicación para autenticación social
+│   │       │   └── usecases                        # Casos de uso específicos para autenticación social
+│   │       ├── domain                              # Capa de dominio para autenticación social
+│   │       │   ├── entities                        # Entidades relacionadas con autenticación social
+│   │       │   └── repositories                    # Repositorios relacionados con autenticación social
+│   │       └── interfaces                          # Interfaces relacionadas con autenticación social
+│   │           └── controllers                     # Controladores para autenticación social
+│   │
+│   └── management                                  # Módulo de gestión
+│       ├── blogs                                   # Submódulo de blogs de gestión
+│       ├── calendar                                # Submódulo de calendario de gestión
+│       │   ├── events                              # Eventos del calendario
+│       │   ├── meetings                            # Reuniones del calendario
+│       │   ├── tasks                               # Tareas del calendario
+│       │   └── notifications                       # Notificaciones del calendario
+│       │       ├── conferences                     # Conferencias en las notificaciones
+│       │       ├── seminars                        # Seminarios en las notificaciones
+│       │       └── webinars                        # Webinars en las notificaciones
+│       ├── presentations                           # Submódulo de presentaciones de gestión
+│       │   ├── videos                              # Videos en las presentaciones
+│       │   │   ├── conferences                     # Conferencias en los videos
+│       │   │   ├── seminars                        # Seminarios en los videos
+│       │   │   └── webinars                        # Webinars en los videos
+│       │   ├── demos                               # Demos en las presentaciones
+│       │   └── tutorials                           # Tutoriales en las presentaciones
+│       └── resources                               # Submódulo de recursos de gestión
+│           ├── documents                           # Documentos en los recursos
+│           │   ├── reports                         # Informes en los documentos
+│           │   ├── whitepapers                     # Libros blancos en los documentos
+│           │   └── videos                          # Videos en los documentos
+│           │       ├── demos                       # Demos en los videos
+│           │       ├── tutorials                   # Tutoriales en los videos
+│           │       └── reports                     # Informes en los videos
+│           └── videos                              # Videos en los recursos
+│               ├── demos                           # Demos en los videos
+│               ├── tutorials                       # Tutoriales en los videos
+│               └── reports                         # Informes en los videos
+│
+├── core                                            # Módulo principal del núcleo
+│   ├── bases                                       # Clases y funciones base
+│   ├── contexts                                    # Contextos de la aplicación
+│   │   └── managers                                # Gestores de contextos
+│   ├── databases                                   # Configuración de bases de datos
+│   ├── helpers                                     # Funciones de ayuda
+│   ├── middlewares                                 # Middleware de la aplicación
+│   ├── routers                                     # Enrutadores de la aplicación
+│   ├── services                                    # Servicios principales
+│   │   └── external_services                       # Servicios externos
+│   └── templates                                   # Plantillas de la aplicación
+│
+└── tests                                           # Pruebas unitarias y de integración
+    ├── conftest.py                                 # Configuración de pruebas
+    ├── test_main.py                                # Pruebas para el módulo principal
+    └── test_modules                                # Pruebas para los módulos individuales
+        ├── test_administration                     # Pruebas para el módulo de administración
+        ├── test_authentication                     # Pruebas para el módulo de autenticación
+        └── test_management                         # Pruebas para el módulo de gestión
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "content.tabs.link", "navigation.indexes", "content.tooltips", "navigation.path", "content.code.annotate", "content.code.copy", "content.code.select", "navigation.tabs"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>
