@@ -25,3 +25,6 @@ pytest
 black
 flake8
 pre-commit
+
+# DOCUMENTATION
+mkdocs-material

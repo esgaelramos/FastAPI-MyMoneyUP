@@ -1,4 +1,4 @@
-# Arquitectura Onion para Proyecto Python
+# Arquitectura Onion
 
 Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estructura modular y fácilmente mantenible. La arquitectura Onion se basa en capas concéntricas, cada una con una función específica. La estructura del proyecto refleja esta organización en capas y facilita el desarrollo, la prueba y el mantenimiento del software.
 
@@ -54,7 +54,7 @@ Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estru
 
 
 # Estructura del Proyecto
- ```
+```console
 │
 ├── .env                                            # Configuración de entorno
 ├── .env.test                                       # Configuración de entorno para pruebas
@@ -208,5 +208,4 @@ Este proyecto sigue el patrón de arquitectura Onion para proporcionar una estru
         ├── test_administration                     # Pruebas para el módulo de administración
         ├── test_authentication                     # Pruebas para el módulo de autenticación
         └── test_management                         # Pruebas para el módulo de gestión
-
- ```
+```

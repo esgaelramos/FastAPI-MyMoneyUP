@@ -1,0 +1,53 @@
+site_name: Temii API
+
+theme:
+  language: es
+  name: material
+  palette:
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: teal
+      accent: amber
+
+  features:
+  - search.suggest
+  - search.highlight
+  - content.tabs.link
+  - navigation.indexes
+  - content.tooltips
+  - navigation.path
+  - content.code.annotate
+  - content.code.copy
+  - content.code.select
+  - navigation.tabs
+
+nav:
+  - Inicio: index.md
+
+  - Arquitectura:
+    - Bases de datos:
+      - architecture/databases/postgresql.md
+      - architecture/databases/redis.md
+
+    - Directorios: architecture/directories/directories.md
+
+    - Middlewares:
+      - architecture/middlewares/jwt.md
+      - architecture/middlewares/rate_limit.md
+    
+    - Requisitos: architecture/requirements/requirements.md
+
+    - Configuraciones:
+      - architecture/settings/environments.md
+      - architecture/settings/migtrations.md
+      - architecture/settings/pre_commit.md
+
+    # - Modulos del Proyecto:
+    #   - Autenticacion y Autorizacion:
+    #   - Administracion:
+    #   - gestion de la aplicacion:
+
+    # - Flujos de Trabajo:
+
+
+  - Release Notes: release.md
