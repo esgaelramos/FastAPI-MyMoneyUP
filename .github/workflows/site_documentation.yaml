@@ -18,17 +18,25 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
+  
       - name: Debug Information
         run: |
           DOCUMENTATION_DIR="documentation"
           ls -R $DOCUMENTATION_DIR
+
+      - name: Build MkDocs
+        run: |
+          DOCUMENTATION_DIR="documentation"
+          cd $DOCUMENTATION_DIR
+          mkdocs build
+
       - name: Site Documentation
         run: |
           DOCUMENTATION_DIR="documentation"
           cd $DOCUMENTATION_DIR
           mkdocs gh-deploy --force
+          
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ github.token }}
           publish_dir: ./documentation/docs
