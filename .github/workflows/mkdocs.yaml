@@ -34,3 +34,21 @@ jobs:
         run: |
           cd documentation
           mkdocs gh-deploy --force
+
+      - name: Update build status
+        run: |
+          token="${{ secrets.GITHUB_TOKEN }}"
+          sha="${{ github.sha }}"
+          repo="${{ github.repository }}"
+          status="success"
+          context="MkDocs Build"
+          description="MkDocs build successful!"
+          target_url="https://esgaelramos.github.io/FastAPI-MyMoneyUP/"
+
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token $token" \
+            "https://api.github.com/repos/$repo/statuses/$sha" \
+            -d "{\"state\":\"$status\",\"context\":\"$context\",\"description\":\"$description\",\"target_url\":\"$target_url\"}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
