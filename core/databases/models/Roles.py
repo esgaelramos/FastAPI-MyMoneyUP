@@ -5,6 +5,9 @@ from sqlalchemy import String, Boolean
 from . import Users
 from . import Groups
 from . import Endpoints
+from . import UsersRoles
+from . import GroupsRoles
+from . import EndpointsRoles
 from core.bases.BaseModels import BaseModel
 
 
@@ -16,9 +19,9 @@ class Roles(BaseModel):
     role_status: Mapped[bool] = mapped_column(Boolean, default=False)
 
     # back_populates
-    back_users_roles: Mapped["Users.Users"] = relationship(secondary=Users.users_roles, back_populates="roles")
-    back_groups_roles: Mapped["Groups.Groups"] = relationship(secondary=Groups.groups_roles, back_populates="roles")
-    back_endpoints_roles: Mapped["Endpoints.Endpoints"] = relationship(secondary=Endpoints.endpoints_roles, back_populates="roles")
+    back_users_roles: Mapped["Users.Users"] = relationship(secondary=UsersRoles.users_roles, back_populates="roles")
+    back_groups_roles: Mapped["Groups.Groups"] = relationship(secondary=GroupsRoles.groups_roles, back_populates="roles")
+    back_endpoints_roles: Mapped["Endpoints.Endpoints"] = relationship(secondary=EndpointsRoles.endpoints_roles, back_populates="roles")
 
     def __repr__(self) -> str:
         return self.role_name

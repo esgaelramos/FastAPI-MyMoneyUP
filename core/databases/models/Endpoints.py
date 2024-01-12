@@ -2,27 +2,13 @@ from typing import List
 
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 
-from sqlalchemy import String, Boolean, JSON, Table, Column, ForeignKey
+from sqlalchemy import String, Boolean, JSON
 
 from . import Roles
 from . import Groups
+from . import EndpointsRoles
+from . import EndpointsGroups
 from core.bases.BaseModels import BaseModel
-
-
-endpoints_roles = Table(
-    "endpoints_roles",
-    BaseModel.metadata,
-    Column("endpoint_id", ForeignKey("endpoints.id")),
-    Column("role_id", ForeignKey("roles.id")),
-)
-
-
-endpoints_groups = Table(
-    "endpoints_groups",
-    BaseModel.metadata,
-    Column("endpoint_id", ForeignKey("endpoints.id")),
-    Column("group_id", ForeignKey("groups.id")),
-)
 
 
 class Endpoints(BaseModel):
@@ -37,8 +23,12 @@ class Endpoints(BaseModel):
     endpoint_authenticated: Mapped[bool] = mapped_column(Boolean, default=True)
 
     # relationship
-    roles: Mapped[List["Roles.Roles"]] = relationship(secondary=endpoints_roles, back_populates="back_endpoints_roles", lazy="selectin")
-    groups: Mapped[List["Groups.Groups"]] = relationship(secondary=endpoints_groups, back_populates="back_endpoints_groups", lazy="selectin")
+    roles: Mapped[List["Roles.Roles"]] = relationship(
+        secondary=EndpointsRoles.endpoints_roles, back_populates="back_endpoints_roles", lazy="selectin"
+    )
+    groups: Mapped[List["Groups.Groups"]] = relationship(
+        secondary=EndpointsGroups.endpoints_groups, back_populates="back_endpoints_groups", lazy="selectin"
+    )
 
     def __repr__(self) -> str:
         return self.endpoint_name

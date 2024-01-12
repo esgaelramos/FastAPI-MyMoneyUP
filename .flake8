@@ -1,5 +1,5 @@
 [flake8]
 exclude = .git, *migrations*
-extend-ignore = W291
+extend-ignore = W291, F401
 max-line-length = 150
 max-complexity = 20
