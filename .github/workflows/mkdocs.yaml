@@ -40,13 +40,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const fs = require('fs');
-
-            const context = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+            const eventData = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
 
             github.repos.createCommitStatus({
-              ...context.repo,
-              sha: context.sha,
+              ...eventData.repo,
+              sha: eventData.sha,
               state: 'success',
               context: 'MkDocs Build',
               description: 'MkDocs build successful!',
