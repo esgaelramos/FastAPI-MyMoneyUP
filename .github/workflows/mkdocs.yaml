@@ -1,14 +1,11 @@
 name: mkdocs
-
 on:
   push:
     branches:
       - master
       - main
-  
 permissions:
   contents: write
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,4 +15,4 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
-      - run: cd documentation && mkdocs gh-deploy --force
+      - run: mkdocs gh-deploy --force
