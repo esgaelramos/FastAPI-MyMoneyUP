@@ -3,7 +3,7 @@
 ## 1. Inicializar un Proyecto Alembic:
 <div class="termy">
 ```console
-$ alembic init migrations
+$ alembic init -t async migrations
 ```
 </div>
 
