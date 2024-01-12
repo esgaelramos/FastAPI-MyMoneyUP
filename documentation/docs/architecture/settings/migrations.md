@@ -1,5 +1,5 @@
 # Comandos para Migración con Alembic y SQLAlchemy
-
+ 
 ## 1. Inicializar un Proyecto Alembic:
 <div class="termy">
 ```console
