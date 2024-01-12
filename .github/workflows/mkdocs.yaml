@@ -1,11 +1,14 @@
-name: mkdocs
+name: Site Documentation
+
 on:
   push:
     branches:
       - master
       - main
+
 permissions:
   contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,4 +18,12 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
-      - run: cd documentation && mkdocs gh-deploy --force
+      - name: Debug Information
+        run: |
+          DOCUMENTATION_DIR="documentation"
+          ls -R $DOCUMENTATION_DIR
+      - name: Site Documentation
+        run: |
+          DOCUMENTATION_DIR="documentation"
+          cd $DOCUMENTATION_DIR
+          mkdocs gh-deploy --force
