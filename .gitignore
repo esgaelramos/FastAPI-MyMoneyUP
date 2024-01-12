@@ -1,6 +1,6 @@
-migrations/
-alembic.ini
-*.ini
+# migrations/
+# alembic.ini
+# *.ini
 # pyproject.toml
 .env
 
