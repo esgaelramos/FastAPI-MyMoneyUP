@@ -27,3 +27,8 @@ jobs:
           DOCUMENTATION_DIR="documentation"
           cd $DOCUMENTATION_DIR
           mkdocs gh-deploy --force
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./documentation/docs
