@@ -1,4 +1,4 @@
-# Temii API
+# Talk Organizer API
 Proyecto para la organizacion, control y administracion del servidor "Python Colombia" desde un sitio de administacion que este conectada
 mediante un bot de discord, al servidor de Python Colombia.
 

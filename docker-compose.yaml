@@ -1,10 +1,10 @@
 version: '3'
 
 services:
-    temii:
+    talk_organizer:
         build: .
-        image: temii_image
-        container_name: temii_container
+        image: talk_organizer_image
+        container_name: talk_organizer_container
         command: uvicorn core.application:app --reload --host 0.0.0.0 --port 8000 --workers 8
 
         ports:
@@ -14,4 +14,4 @@ services:
             - .env
 
         volumes:
-            - ./:/python_colombia/temii
+            - ./:/python_colombia/talk_organizer
